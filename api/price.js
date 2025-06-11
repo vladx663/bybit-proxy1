@@ -1,6 +1,3 @@
-
-const fetch = require('node-fetch');
-
 export default async function handler(req, res) {
   try {
     const response = await fetch('https://api.bybit.com/v2/public/tickers?symbol=BTCUSDT');
@@ -8,6 +5,6 @@ export default async function handler(req, res) {
     const price = data.result[0].last_price;
     res.status(200).json({ price });
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch price" });
+    res.status(500).json({ error: "Failed to fetch price", details: error.message });
   }
 }
